@@ -1,0 +1,36 @@
+# Jev Token Scanner Configuration
+
+coingecko:
+  base_url: "https://api.coingecko.com/api/v3"
+  markets_endpoint: "/coins/markets"
+  list_endpoint: "/coins/list"
+  trending_endpoint: "/search/trending"
+  # Free tier: ~10-30 req/min
+  rate_limit_delay: 2.0  # seconds between requests
+  default_vs_currency: "usd"
+  per_page: 50
+
+jev:
+  openrouter_url: "https://openrouter.ai/api/alpha/decisions"
+  model: "typesafe/jev-1.13"
+  questions:
+    - id: "project_quality"
+      question: "What is the overall project quality?"
+      type: "choice"
+      choices: ["legit-promising", "mediocre", "suspicious", "likely-rug", "confirmed-rug"]
+    - id: "investment_score"
+      question: "Rate the investment potential from 1 to 10"
+      type: "score"
+      min: 1
+      max: 10
+    - id: "honeypot"
+      question: "Does this token contain honeypot indicators?"
+      type: "noul"
+    - id: "rugpull"
+      question: "Is this token likely a rugpull?"
+      type: "noul"
+
+scanner:
+  watch_interval: 300  # seconds between watch scans
+  log_file: "scan_results.jsonl"
+  max_tokens_per_scan: 100
