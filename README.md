@@ -2,6 +2,31 @@
 
 A token/project classifier powered by [Jev](https://openrouter.ai) (typesafe/jev-1.13). Scans new and trending tokens from CoinGecko and judges each on project quality, investment potential, honeypot indicators, and rugpull risk.
 
+
+## 🔍 On-Chain Security & Token Scanner
+
+```mermaid
+flowchart TD
+    MempoolDEX["DEX New Pair Listener
+(Uniswap, Raydium, Pump.fun)"] --> ScannerCore["Token Security Audit Suite"]
+    
+    subgraph SecurityChecks ["Automated Rug & Honeypot Checks"]
+        Liquidity["Liquidity Pool Lock Verification
+(Unicrypt, PinkSale, Burnt)"]
+        Authority["Mint & Freeze Authority Audit
+(Revoked vs Mutable)"]
+        Honeypot["Simulated Buy/Sell Simulation
+(Tax & Transfer Fee Inspection)"]
+        TopHolders["Top 10 Holder Concentration Risk"]
+    end
+
+    ScannerCore --> SecurityChecks
+    SecurityChecks --> SafetyScore["Safety Score Matrix (0-100)
+Only Pass Clean Tokens to Sniper"]
+```
+
+---
+
 ## Setup
 
 ```bash
